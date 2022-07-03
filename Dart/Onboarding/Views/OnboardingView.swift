@@ -8,8 +8,22 @@
 import UIKit
 
 class OnboardingView: UIView {
-    private lazy var onboardingCV = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-    private lazy var getStartedButton = DartButton()
+    
+    private lazy var onboardingCV: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = Colors.teal
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        return cv
+    }()
+    
+    private lazy var getStartedButton: DartButton = {
+        let button = DartButton()
+        button.setTitle(StringLiterals.ButtonTitles.getStarted, for: .normal)
+        button.onTap = gohome
+        return button
+    }()
     
     
     override init(frame: CGRect) {
@@ -30,8 +44,6 @@ class OnboardingView: UIView {
         onboardingCV.dataSource = self
         onboardingCV.delegate = self
         onboardingCV.register(OnboardingCollectionViewCell.self, forCellWithReuseIdentifier: OnboardingCollectionViewCell.identifier)
-        onboardingCV.backgroundColor = Colors.teal
-        onboardingCV.translatesAutoresizingMaskIntoConstraints = false
         addSubview(onboardingCV)
         NSLayoutConstraint.activate([
             onboardingCV.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -42,8 +54,6 @@ class OnboardingView: UIView {
     }
     
     func setupButton() {
-        getStartedButton.setTitle(StringLiterals.ButtonTitles.getStarted, for: .normal)
-        getStartedButton.onTap = gohome
         addSubview(getStartedButton)
         NSLayoutConstraint.activate([
             getStartedButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
@@ -53,7 +63,7 @@ class OnboardingView: UIView {
     }
     
     func gohome(){
-        
+        print("going home....")
     }
     
     
@@ -65,7 +75,7 @@ extension OnboardingView: UICollectionViewDelegate {
 
 extension OnboardingView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,4 +88,18 @@ extension OnboardingView: UICollectionViewDataSource {
     }
     
     
+}
+
+extension OnboardingView: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: frame.size.width, height: frame.size.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        5
+    }
 }

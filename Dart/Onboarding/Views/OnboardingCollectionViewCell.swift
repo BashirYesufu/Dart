@@ -9,6 +9,15 @@ import UIKit
 
 class OnboardingCollectionViewCell: UICollectionViewCell {
     static let identifier = StringLiterals.CellIdentifiers.onboardingCell
+    var title: String?
+    var subTitle: String?
+    var image: UIImage?
+    
+    func setupCell(with data: OnboardingModel){
+        title = data.title
+        subTitle = data.subTitle
+        image = data.image
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

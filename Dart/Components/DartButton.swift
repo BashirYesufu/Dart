@@ -23,7 +23,7 @@ class DartButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalToConstant: 50).isActive = true
         backgroundColor = Colors.yellow
-        layer.cornerRadius = 25
+        layer.cornerRadius = 10
         setTitleColor(Colors.blue, for: .normal)
         addTarget(self, action: #selector(dartButtonClicked), for: .touchUpInside)
     }
