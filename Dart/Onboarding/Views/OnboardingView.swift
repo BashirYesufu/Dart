@@ -30,8 +30,8 @@ class OnboardingView: UIView {
         onboardingCV.dataSource = self
         onboardingCV.delegate = self
         onboardingCV.register(OnboardingCollectionViewCell.self, forCellWithReuseIdentifier: OnboardingCollectionViewCell.identifier)
+        onboardingCV.backgroundColor = Colors.teal
         onboardingCV.translatesAutoresizingMaskIntoConstraints = false
-        onboardingCV.backgroundColor = .link
         addSubview(onboardingCV)
         NSLayoutConstraint.activate([
             onboardingCV.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
